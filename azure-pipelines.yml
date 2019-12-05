@@ -5,6 +5,7 @@ trigger:
 stages:
 - stage: Build_1
   displayName: BuildStage_1
+  dependsOn: Deploy
   jobs:  
   - job: Build
     displayName: Build job 1
@@ -15,7 +16,7 @@ stages:
       displayName: 'Build'
 - stage: Build_2
   displayName: BuildStage_1
-  dependsOn: []
+  dependsOn: Deploy
   jobs:  
   - job: Build
     displayName: Build job 2
@@ -26,9 +27,7 @@ stages:
       displayName: 'Build'
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn:
-  - Build_1
-  - Build_2
+  dependsOn: []
   jobs:
   - deployment: deploy
     displayName: Deploy job
