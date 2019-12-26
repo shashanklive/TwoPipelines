@@ -44,3 +44,22 @@ stages:
               ScriptType: 'InlineScript'
               Inline: 'Write-Host "Hello"'
               azurePowerShellVersion: 'LatestVersion'
+- stage: Deploy2
+  displayName: Deploy stage 2
+  dependsOn: []
+  jobs:
+  - deployment: deploy
+    displayName: Deploy job
+    environment: 'myFirstEnvironment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - powershell: Write-Host "run your deployment steps"
+            displayName: Run Deployment
+          - task: AzurePowerShell@4
+            inputs:
+              azureSubscription: 'RMPM'
+              ScriptType: 'InlineScript'
+              Inline: 'Write-Host "Hello"'
+              azurePowerShellVersion: 'LatestVersion'
